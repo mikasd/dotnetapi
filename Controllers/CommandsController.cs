@@ -9,11 +9,17 @@ namespace Commander.Controllers
     [Route("api/commands")]
     public class CommandsController : ControllerBase
     {
-        public CommandsController(ICommanderRepo repository){
-            
+        // this seems obvious but I am writing it because I am tired and want to remember, _before signals readonly
+        // used for DI
+        private readonly ICommanderRepo _repository;
+
+        public CommandsController(ICommanderRepo repository)
+        {
+            _repository = repository;    
         }
 
-        private readonly MockCommanderRepository _repository = new MockCommanderRepository();
+        // below was used for testing before setting up scoped services in startup with dependency injection
+        // private readonly MockCommanderRepository _repository = new MockCommanderRepository();
         [HttpGet]
         public ActionResult<IEnumerable<Command>> GetAllCommands()
         {
