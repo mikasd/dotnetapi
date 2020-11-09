@@ -22,13 +22,6 @@ namespace Commander
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-
             services.AddDbContext<CommanderContext>(opt => 
             {
                 opt.UseNpgsql(Configuration.GetSection("DatabaseConfig")["PostgresSQL"]))
@@ -40,10 +33,6 @@ namespace Commander
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Commander", Version = "v1" });
-            // });
-
-            // services.AddDbContext<ApplicationContext>(options =>
-            //     options.UseNpgsql(Configuration.GetSection("DatabaseConfig")["PostgresSQL"]);
             // });
         }
 
